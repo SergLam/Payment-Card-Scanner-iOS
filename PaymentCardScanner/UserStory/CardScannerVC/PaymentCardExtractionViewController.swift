@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import Vision
 
-class PaymentCardExtractionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+final class PaymentCardExtractionViewController: UIViewController {
     
     private let requestHandler = VNSequenceRequestHandler()
     private var rectangleDrawing: CAShapeLayer?
@@ -52,25 +52,6 @@ class PaymentCardExtractionViewController: UIViewController, AVCaptureVideoDataO
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.previewLayer.frame = self.view.bounds
-    }
-    
-    // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
-    
-    func captureOutput(_ output: AVCaptureOutput,
-                       didOutput sampleBuffer: CMSampleBuffer,
-                       from connection: AVCaptureConnection) {
-        guard let frame = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-            debugPrint("unable to get image from sample buffer")
-            return
-        }
-        DispatchQueue.main.async {
-            self.rectangleDrawing?.removeFromSuperlayer() // removes old rectangle drawings
-        }
-        if let paymentCardRectangleObservation = self.paymentCardRectangleObservation {
-            self.handleObservedPaymentCard(paymentCardRectangleObservation, in: frame)
-        } else if let paymentCardRectangleObservation = self.detectPaymentCard(frame: frame) {
-            self.paymentCardRectangleObservation = paymentCardRectangleObservation
-        }
     }
     
     // MARK: - Camera setup
@@ -157,8 +138,12 @@ class PaymentCardExtractionViewController: UIViewController, AVCaptureVideoDataO
             DispatchQueue.global(qos: .userInitiated).async {
                 if let extractedNumber = self.extractPaymentCardNumber(frame: frame, rectangle: observation) {
                     DispatchQueue.main.async {
+                        print("Card number: \(extractedNumber)")
                         self.resultsHandler(extractedNumber)
                     }
+                } else {
+                    
+                    print("Unable to recognize card number")
                 }
             }
         } else {
@@ -181,6 +166,7 @@ class PaymentCardExtractionViewController: UIViewController, AVCaptureVideoDataO
         
         guard let texts = request.results as? [VNRecognizedTextObservation], texts.count > 0 else {
             // no text detected
+            print("no text detected")
             return nil
         }
         
@@ -194,12 +180,15 @@ class PaymentCardExtractionViewController: UIViewController, AVCaptureVideoDataO
         let has4sections4digits = _4digits.count == 4
         
         let digits = _16digits ?? _4digits.joined()
+        print("Recognized text: \(digits)")
         let digitsIsValid = (has16Digits || has4sections4digits) && self.checkDigits(digits)
         return digitsIsValid ? digits : nil
     }
     
     private func checkDigits(_ digits: String) -> Bool {
+        
         guard digits.count == 16, CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: digits)) else {
+            print("Not valid digits string - count or non-digit character")
             return false
         }
         var digits = digits
@@ -220,4 +209,28 @@ class PaymentCardExtractionViewController: UIViewController, AVCaptureVideoDataO
         let checkDigitCalc = (sum * 9) % 10
         return Int(String(checksum))! == checkDigitCalc
     }
+}
+
+// MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
+extension PaymentCardExtractionViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+    
+    func captureOutput(_ output: AVCaptureOutput,
+                       didOutput sampleBuffer: CMSampleBuffer,
+                       from connection: AVCaptureConnection) {
+        
+        guard let frame = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            debugPrint("unable to get image from sample buffer")
+            return
+        }
+        DispatchQueue.main.async {
+            self.rectangleDrawing?.removeFromSuperlayer() // removes old rectangle drawings
+        }
+        if let paymentCardRectangleObservation = self.paymentCardRectangleObservation {
+            self.handleObservedPaymentCard(paymentCardRectangleObservation, in: frame)
+        } else if let paymentCardRectangleObservation = self.detectPaymentCard(frame: frame) {
+            self.paymentCardRectangleObservation = paymentCardRectangleObservation
+        }
+    }
+    
+    
 }

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainVC.swift
 //  PaymentCardScanner
 //
 //  Created by Anurag Ajwani on 12/06/2020.
@@ -8,11 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class MainVC: UIViewController {
 
-    @IBOutlet weak var resultsLabel: UILabel!
+    @IBOutlet private weak var resultsLabel: UILabel!
 
-    @IBAction func scanPaymentCard(_ sender: Any) {
+    @IBAction private func scanPaymentCard(_ sender: Any) {
+        
         let paymentCardExtractionViewController = PaymentCardExtractionViewController(resultsHandler: { paymentCardNumber in
             self.resultsLabel.text = paymentCardNumber
             self.dismiss(animated: true, completion: nil)
