@@ -10,16 +10,30 @@ import UIKit
 
 final class MainVC: UIViewController {
 
-    @IBOutlet private weak var resultsLabel: UILabel!
-
-    @IBAction private func scanPaymentCard(_ sender: Any) {
-        
-        let paymentCardExtractionViewController = PaymentCardExtractionViewController(resultsHandler: { paymentCardNumber in
-            self.resultsLabel.text = paymentCardNumber
-            self.dismiss(animated: true, completion: nil)
-        })
-        paymentCardExtractionViewController.modalPresentationStyle = .fullScreen
-        self.present(paymentCardExtractionViewController, animated: true, completion: nil)
+    private let contentView: MainVCView = MainVCView()
+    
+    override func loadView() {
+        view = contentView
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        contentView.delegate = self
+    }
+    
 }
 
+// MARK: - MainVCViewDelegate
+extension MainVC: MainVCViewDelegate {
+    
+    func didTapActionButton() {
+        
+        let paymentCardExtractionVC = PaymentCardExtractionVC(resultsHandler: { paymentCardNumber in
+            self.contentView.updateLabelText(paymentCardNumber)
+            self.presentedViewController?.dismiss(animated: true, completion: nil)
+        })
+        paymentCardExtractionVC.modalPresentationStyle = .fullScreen
+        present(paymentCardExtractionVC, animated: true, completion: nil)
+    }
+    
+}

@@ -7,25 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		045FBA5F2643EB940067C782 /* PaymentCardExtractionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FBA5E2643EB940067C782 /* PaymentCardExtractionViewModel.swift */; };
+		045FBA61264415DB0067C782 /* MainVCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FBA60264415DB0067C782 /* MainVCView.swift */; };
 		1B5D2DED2493BB660002B52D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5D2DEC2493BB660002B52D /* AppDelegate.swift */; };
 		1B5D2DEF2493BB660002B52D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5D2DEE2493BB660002B52D /* SceneDelegate.swift */; };
 		1B5D2DF12493BB660002B52D /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5D2DF02493BB660002B52D /* MainVC.swift */; };
-		1B5D2DF42493BB660002B52D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B5D2DF22493BB660002B52D /* Main.storyboard */; };
 		1B5D2DF62493BB670002B52D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B5D2DF52493BB670002B52D /* Assets.xcassets */; };
 		1B5D2DF92493BB670002B52D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B5D2DF72493BB670002B52D /* LaunchScreen.storyboard */; };
-		1B5D2E012493BDC60002B52D /* PaymentCardExtractionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5D2E002493BDC60002B52D /* PaymentCardExtractionViewController.swift */; };
+		1B5D2E012493BDC60002B52D /* PaymentCardExtractionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5D2E002493BDC60002B52D /* PaymentCardExtractionVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		045FBA5E2643EB940067C782 /* PaymentCardExtractionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCardExtractionViewModel.swift; sourceTree = "<group>"; };
+		045FBA60264415DB0067C782 /* MainVCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCView.swift; sourceTree = "<group>"; };
 		1B5D2DE92493BB660002B52D /* PaymentCardScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaymentCardScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B5D2DEC2493BB660002B52D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B5D2DEE2493BB660002B52D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1B5D2DF02493BB660002B52D /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
-		1B5D2DF32493BB660002B52D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1B5D2DF52493BB670002B52D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B5D2DF82493BB670002B52D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B5D2DFA2493BB670002B52D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1B5D2E002493BDC60002B52D /* PaymentCardExtractionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCardExtractionViewController.swift; sourceTree = "<group>"; };
+		1B5D2E002493BDC60002B52D /* PaymentCardExtractionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCardExtractionVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +71,8 @@
 		045FBA5B264334AB0067C782 /* CardScannerVC */ = {
 			isa = PBXGroup;
 			children = (
-				1B5D2E002493BDC60002B52D /* PaymentCardExtractionViewController.swift */,
+				1B5D2E002493BDC60002B52D /* PaymentCardExtractionVC.swift */,
+				045FBA5E2643EB940067C782 /* PaymentCardExtractionViewModel.swift */,
 			);
 			path = CardScannerVC;
 			sourceTree = "<group>";
@@ -77,8 +80,8 @@
 		045FBA5C264334B70067C782 /* MainVC */ = {
 			isa = PBXGroup;
 			children = (
-				1B5D2DF22493BB660002B52D /* Main.storyboard */,
 				1B5D2DF02493BB660002B52D /* MainVC.swift */,
+				045FBA60264415DB0067C782 /* MainVCView.swift */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
@@ -178,7 +181,6 @@
 			files = (
 				1B5D2DF92493BB670002B52D /* LaunchScreen.storyboard in Resources */,
 				1B5D2DF62493BB670002B52D /* Assets.xcassets in Resources */,
-				1B5D2DF42493BB660002B52D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,9 +191,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B5D2E012493BDC60002B52D /* PaymentCardExtractionViewController.swift in Sources */,
+				045FBA61264415DB0067C782 /* MainVCView.swift in Sources */,
+				1B5D2E012493BDC60002B52D /* PaymentCardExtractionVC.swift in Sources */,
 				1B5D2DF12493BB660002B52D /* MainVC.swift in Sources */,
 				1B5D2DED2493BB660002B52D /* AppDelegate.swift in Sources */,
+				045FBA5F2643EB940067C782 /* PaymentCardExtractionViewModel.swift in Sources */,
 				1B5D2DEF2493BB660002B52D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,14 +203,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1B5D2DF22493BB660002B52D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1B5D2DF32493BB660002B52D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		1B5D2DF72493BB670002B52D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
